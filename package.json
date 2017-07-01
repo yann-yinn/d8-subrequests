@@ -1,6 +1,6 @@
 {
   "name": "d8-subrequests",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "execute several JSON-API requests in a single http request",
   "main": "index.js",
   "scripts": {
