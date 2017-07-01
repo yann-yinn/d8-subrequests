@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { buildQueryString } = require('d8-jsonapi-querystring').buildQueryString
+const buildQueryString = require('d8-jsonapi-querystring').buildQueryString
 
 class SubRequests {
 
