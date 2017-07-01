@@ -1,0 +1,26 @@
+{
+  "name": "d8-subrequests",
+  "version": "0.0.1",
+  "description": "execute several JSON-API requests in a single http request",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "Drupal",
+    "8",
+    "subrequests",
+    "JSON",
+    "API"
+  ],
+  "author": "yann.boisselier@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "d8-jsonapi-querystring": "0.0.5"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
+  }
+}
