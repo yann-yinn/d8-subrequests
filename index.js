@@ -1,9 +1,9 @@
-const axios = require('axios')
 const buildQueryString = require('d8-jsonapi-querystring').buildQueryString
 
 class SubRequests {
 
   constructor(endpoint) {
+    this.autoincrementedId = 0
     this.endpoint = endpoint
     this.requests = []
   }
@@ -16,31 +16,39 @@ class SubRequests {
       action: "view",
       headers: {
         Accept: "application/json"
-      },
-      options: {}
-    }
-    if (request.options) {
-      request.uri = request.uri + '?' + buildQueryString(request.options)
+      }
     }
     const subrequest = Object.assign(defaultOptions, request)
+
+    if (subrequest.options) {
+      subrequest.uri = subrequest.uri + '?' + buildQueryString(subrequest.options)
+    }
+    // generate automatically a requestId if needed
+    if (subrequest.requestId === undefined) {
+      subrequest.requestId = ++this.autoincrementedId
+    }
     this.requests.push(subrequest)
   }
 
+   textToBinary(string) {
+    return string.split('').map(function (char) {
+        return char.charCodeAt(0).toString(2);
+    }).join(' ');
+   }
+
   /**
-   * @param response : axios response object
+   * @param {string} response : raw *body* of the http response sended by subrequests drupal module
    */
-  parseMultipartResponse (response) {
-    const boundary = response.headers['content-type'].match(/"([^']+)"/)[1]
-    const responses = response.data.split('--' + boundary).filter(v => v !== "" && v !== '--').map(v => JSON.parse(v.split("\n\r")[1]))
+  parseResponse (responseBody) {
+    const boundary = responseBody.split('\n')[0].trim()
+    const responses = responseBody.split(boundary).filter(v => v !== "" && v !== '--').map(v => JSON.parse(v.split("\n\r")[1]))
     return responses
   }
 
-  send () {
+  getUrl() {
     const blueprint = JSON.stringify(this.requests)
-    return axios.post(this.endpoint, blueprint)
-      .then(response => {
-        return this.parseMultipartResponse(response)
-      })
+    const url = this.endpoint + '&query=' + encodeURIComponent(blueprint)
+    return url
   }
 
 }
