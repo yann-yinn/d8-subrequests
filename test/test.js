@@ -1,4 +1,4 @@
-const SubRequests = require('../index')
+const SubRequests = require('../dist')
 var expect = require('chai').expect
 
 /**

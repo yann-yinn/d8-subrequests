@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "npm run build && mocha",
     "prepublish": "npm run build",
     "build": "babel index.js -d dist"
   },
