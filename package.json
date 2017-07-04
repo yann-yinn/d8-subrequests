@@ -1,6 +1,6 @@
 {
   "name": "d8-subrequests",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Client for subrequests Drupal 8 module : executes several JSON-API requests in a single http request",
   "main": "dist/index.js",
   "files": [
@@ -25,7 +25,6 @@
   "author": "yann.boisselier@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.16.2",
     "d8-jsonapi-querystring": "0.0.5"
   },
   "devDependencies": {
