@@ -45,10 +45,19 @@ class SubRequests {
     return responses
   }
 
-  getUrl() {
-    const blueprint = JSON.stringify(this.requests)
-    const url = this.endpoint + '&query=' + encodeURIComponent(blueprint)
+  getUrl(isGet = true) {
+    let url = this.endpoint
+
+    if (isGet) {
+      const blueprint = JSON.stringify(this.requests)
+      url += '&query=' + encodeURIComponent(blueprint)
+    }
+
     return url
+  }
+
+  getBlueprint() {
+    return this.requests
   }
 
 }
